@@ -1,6 +1,6 @@
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import sessionmaker
-from app.database.database import engine, metadata
+from database import engine, metadata
 import csv
 
 # Скрипт для заполнения базы данных (по 10 всего) из cvs файла
@@ -15,7 +15,7 @@ Base.prepare()
 users, phones, mails = Base.classes.users, Base.classes.phones, Base.classes.mails
 
 # Заполнение Users
-with open('data/users_ex.csv', encoding='utf-8') as f:
+with open('app/database/data/users_ex.csv', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=';')
     next(reader)
     session = Session()
@@ -33,7 +33,7 @@ with open('data/users_ex.csv', encoding='utf-8') as f:
     session.close()
 
 # Заполнение Phone
-with open('data/phone_ex.csv', encoding='utf-8') as f:
+with open('app/database/data/phone_ex.csv', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=';')
     next(reader)
     session = Session()
@@ -49,7 +49,7 @@ with open('data/phone_ex.csv', encoding='utf-8') as f:
     session.close()
 
 # Заполнение Mail
-with open('data/mail_ex.csv', encoding='utf-8') as f:
+with open('app/database/data/mail_ex.csv', encoding='utf-8') as f:
     reader = csv.reader(f, delimiter=';')
     next(reader)
     session = Session()

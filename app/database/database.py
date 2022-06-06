@@ -38,4 +38,5 @@ mails = sa.Table(
 )
 
 engine = sa.create_engine(DATABASE_URL)
+metadata.create_all(engine)
 

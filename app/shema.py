@@ -8,7 +8,7 @@ class OurBaseModel(BaseModel):
 
 
 # Схемы и валидаторы для полей БД
-class PhonesShem(BaseModel):
+class PhonesShem(OurBaseModel):
     id: int
     type_phone: str
     number_phone: str
@@ -29,7 +29,7 @@ class PhonesShem(BaseModel):
         return number_phone
 
 
-class MailsShem(BaseModel):
+class MailsShem(OurBaseModel):
     id: int
     type_mail: str
     address_mail: str
