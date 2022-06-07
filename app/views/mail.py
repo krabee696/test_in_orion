@@ -4,6 +4,7 @@ from shema import MailsShem
 from fastapi import APIRouter
 from database.database import mails, database
 
+# Вызов роутеров для почты
 mails_router = APIRouter()
 
 

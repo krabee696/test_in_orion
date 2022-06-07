@@ -4,11 +4,15 @@ from sqlalchemy.schema import ForeignKey
 
 # Подключение к БД и ее развертывание
 
+# database_ur = "dialect+driver://username:password@host:port/database"
 DATABASE_URL = "postgresql://postgres:1223@localhost:5432/address_book"
 
+# Созание объектов хранящих DATABASE_URL и MetaData
+# Объект MetaData содержит все конструкции схемы, которые мы с ним связали
 database = databases.Database(DATABASE_URL)
 metadata = sa.MetaData()
 
+# Описание сущности users
 users = sa.Table(
     'users',
     metadata,
@@ -19,6 +23,7 @@ users = sa.Table(
     sa.Column('address', sa.String)
 )
 
+# Описание сущности phones
 phones = sa.Table(
     'phones',
     metadata,
@@ -28,6 +33,7 @@ phones = sa.Table(
     sa.Column('user_id', sa.Integer, ForeignKey('users.id', ondelete='CASCADE'))
 )
 
+# Описание сущности mails
 mails = sa.Table(
     'mails',
     metadata,
@@ -37,6 +43,8 @@ mails = sa.Table(
     sa.Column('user_id', sa.Integer, ForeignKey('users.id', ondelete='CASCADE'))
 )
 
+# Cоздания объекта Engine именно он отвечает за взаимодействие с базой данных
+# Создание всех конструкций схем, которые мы описали и связали с MetaData выше
 engine = sa.create_engine(DATABASE_URL)
 metadata.create_all(engine)
 

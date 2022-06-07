@@ -4,6 +4,7 @@ from shema import PhonesShem
 from fastapi import APIRouter
 from database.database import phones, database
 
+# Вызов роутеров для телефонов
 phone_router = APIRouter()
 
 

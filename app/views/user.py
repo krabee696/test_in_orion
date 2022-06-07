@@ -4,8 +4,15 @@ from shema import UsersShem
 from fastapi import APIRouter
 from database.database import users, database
 
+# Вызов роутеров для пользователей
 users_router = APIRouter()
 
+# CRUD реализован согласно тз все запросы строятся примерно 
+# по одному и томуже шаблону :
+# @метод_запроса("URL-rout", модель_ответа) 
+# объявление запроса к бд (чтени, удаление и т.д.) 
+# создание записи логером 
+# return...
 
 # Создание Users
 @users_router.put("/users/", response_model=UsersShem)

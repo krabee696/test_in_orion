@@ -1,7 +1,7 @@
 from pydantic import BaseModel, validator
 import datetime
 
-
+# Конфигурационный класс
 class OurBaseModel(BaseModel):
     class Config:
         orm_mode = True
@@ -14,14 +14,12 @@ class PhonesShem(OurBaseModel):
     number_phone: str
     user_id: int
 
-    @classmethod
     @validator('type_phone')
     def check_to_type_phone(cls, type_phone):
         if type_phone not in ['Городской', 'Мобильный']:
             raise ValueError('Incorrect type, must be Городской or Мобильный ')
         return type_phone
 
-    @classmethod
     @validator('number_phone')
     def check_to_length_number_phone(cls, number_phone):
         if 12 != len(number_phone):
@@ -35,7 +33,6 @@ class MailsShem(OurBaseModel):
     address_mail: str
     user_id: int
 
-    @classmethod
     @validator('type_mail')
     def check_to_type_mail(cls, type_mail):
         if type_mail not in ['Личная', 'Рабочая']:
@@ -50,14 +47,12 @@ class UsersShem(OurBaseModel):
     birth_day: datetime.date
     address: str
 
-    @classmethod
     @validator('gender')
     def check_to_type_gender(cls, gender):
         if gender not in ['Мужчина', 'Женщина']:
             raise ValueError('Incorrect type, must be Мужчина or Женщина')
         return gender
 
-    @classmethod
     @validator('full_name')
     def check_to_length_and_spaces_name(cls, full_name):
         if not 3 < len(full_name) < 99:
@@ -66,7 +61,6 @@ class UsersShem(OurBaseModel):
             raise ValueError('Incorrect input method, missing spaces')
         return full_name
 
-    @classmethod
     @validator('address')
     def check_to_length_address(cls, address):
         if not 3 < len(address) < 228:
